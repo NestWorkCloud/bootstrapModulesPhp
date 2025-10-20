@@ -19,22 +19,25 @@ Ce dépôt regroupe des composants UI développés en PHP, compatibles avec Boot
 
 ### 1. `bootstrapModalAtLevelBranchAndGroup.php`
 
-**Module de gestion modale avancée**, basé sur des attributs personnalisés :
+**Page démonstrative complète** avec :
 
-- `data-modal-level` : définit le niveau hiérarchique de la modale
-- `data-modal-branch` : identifie la branche logique (ex. : inscription, édition)
-- `data-modal-group` : regroupe les modales liées (ex. : modales d’un même processus)
-- `data-returnToParentModal` : permet un retour explicite à la modale parente
+- Structure HTML Bootstrap (`<head>`, `<body>`)
+- Panneaux d'information explicites
+- Boutons d'appel modale avec attributs personnalisés
+- Modales hiérarchisées selon niveau, branche et groupe
 
-**Fonctionnalités :**
+**Fonctionnalités illustrées :**
 
-- Ouverture et fermeture contrôlées selon le contexte
 - Navigation fluide entre modales liées
+- Retour volontaire à la modale parente
 - Prévention des boucles ou fermetures involontaires
-- Compatible avec Bootstrap 5+
+- Attribution sémantique : `data-modal-level`, `data-modal-branch`, `data-modal-group`, `data-returnToParentModal`
 
 **Utilisation :**
 
-```php
-require_once 'bootstrapModalAtLevelBranchAndGroup.php';
-createModalFlowConfig();
+> Ce fichier est une **page autonome** à ouvrir directement dans le navigateur.  
+> Il sert de **base pédagogique** pour comprendre et reproduire la logique modale dans vos propres projets.
+
+**Ne pas inclure via `require_once`** — ce n’est pas un module logique mais un exemple complet.
+
+---
