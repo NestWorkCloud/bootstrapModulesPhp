@@ -27,6 +27,10 @@ Ce dépôt regroupe des composants UI développés en PHP, compatibles avec Boot
 - Boutons d’appel modale avec attributs personnalisés (`data-requestedModalLevel`, `data-modalGroup`, etc.)
 - Modales hiérarchisées selon niveau, branche, groupe et identifiant métier (`data-modalRequestId`)
 - Tableaux interactifs activés automatiquement via `data-datatable="true"` et initialisés à l’ouverture
+- Gestion d’accessibilité renforcée :
+  - Désactivation des modales non actives via `inert`
+  - Suppression de `aria-hidden` sur la modale ouverte
+  - Retrait du focus (`blur()`) à la fermeture pour éviter les conflits avec les technologies d’assistance
 
 🔍 **Fonctionnalités illustrées :**
 
@@ -35,6 +39,7 @@ Ce dépôt regroupe des composants UI développés en PHP, compatibles avec Boot
 - Réouverture automatique du modale initial si fermeture passive (option `autoRestore`)
 - Prévention des boucles ou fermetures involontaires grâce au suivi centralisé
 - Initialisation automatique des tableaux DataTables dans les modales ouvertes
+- Sécurisation du focus et de l’accessibilité à la fermeture (clic extérieur ou bouton) via `blur()` et nettoyage des attributs
 - Attribution sémantique claire :  
   `data-modal-level`, `data-modal-branch`, `data-modal-group`, `data-modalRequestId`,  
   `data-returnToParentModal`, `data-datatable`
@@ -42,7 +47,8 @@ Ce dépôt regroupe des composants UI développés en PHP, compatibles avec Boot
 📎 **Utilisation :**
 
 > Ce fichier est une **page autonome** à ouvrir directement dans le navigateur.  
-> Il sert de **base pédagogique** pour comprendre, tester et reproduire la logique modale dans vos propres projets.
+> Il sert de **base pédagogique** pour comprendre, tester et reproduire la logique modale dans vos propres projets.  
+> Il illustre également les bonnes pratiques d’accessibilité dans les systèmes modaux personnalisés.
 
 ❌ **Ne pas inclure via `require_once`** — ce n’est pas un module logique mais un exemple complet, conçu pour démontrer le fonctionnement du système modulaire.
 
