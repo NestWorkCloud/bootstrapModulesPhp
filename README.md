@@ -51,7 +51,7 @@ Ce projet est sous licence MIT. Voir le fichier `LICENSE` à la racine du dépô
 
 ## ✍️ Auteur
 
-Alexis GOMY — architecte technique, passionné par la clarté, la modularité et la documentation pédagogique.
+Alexis GOMY — développeur PHP polyvalent, à la fois UI et traitement, passionné par les systèmes clairs, modulaires et bien documentés.
 
 ---
 
