@@ -22,24 +22,29 @@ Ce dépôt regroupe des composants UI développés en PHP, compatibles avec Boot
 
 🔧 **Page démonstrative complète** avec :
 
-- Structure HTML Bootstrap (`<head>`, `<body>`)
-- Panneaux d'information explicites
-- Boutons d'appel modale avec attributs personnalisés
-- Modales hiérarchisées selon niveau, branche et groupe
+- Structure HTML Bootstrap (`<head>`, `<body>`) prête à l’emploi
+- Panneaux d'information explicites pour guider l’utilisateur
+- Boutons d’appel modale avec attributs personnalisés (`data-requestedModalLevel`, `data-modalGroup`, etc.)
+- Modales hiérarchisées selon niveau, branche, groupe et identifiant métier (`data-modalRequestId`)
+- Tableaux interactifs activés automatiquement via `data-datatable="true"` et initialisés à l’ouverture
 
 🔍 **Fonctionnalités illustrées :**
 
-- Navigation fluide entre modales liées
-- Retour volontaire à la modale parente
-- Prévention des boucles ou fermetures involontaires
-- Attribution sémantique : `data-modal-level`, `data-modal-branch`, `data-modal-group`, `data-returnToParentModal`
+- Navigation fluide entre modales liées par niveau, groupe et branche
+- Retour volontaire à la modale parente via `data-returnToParentModal`
+- Réouverture automatique du modale initial si fermeture passive (option `autoRestore`)
+- Prévention des boucles ou fermetures involontaires grâce au suivi centralisé
+- Initialisation automatique des tableaux DataTables dans les modales ouvertes
+- Attribution sémantique claire :  
+  `data-modal-level`, `data-modal-branch`, `data-modal-group`, `data-modalRequestId`,  
+  `data-returnToParentModal`, `data-datatable`
 
 📎 **Utilisation :**
 
 > Ce fichier est une **page autonome** à ouvrir directement dans le navigateur.  
-> Il sert de **base pédagogique** pour comprendre et reproduire la logique modale dans vos propres projets.
+> Il sert de **base pédagogique** pour comprendre, tester et reproduire la logique modale dans vos propres projets.
 
-❌ **Ne pas inclure via `require_once`** — ce n’est pas un module logique mais un exemple complet.
+❌ **Ne pas inclure via `require_once`** — ce n’est pas un module logique mais un exemple complet, conçu pour démontrer le fonctionnement du système modulaire.
 
 ---
 
