@@ -17,8 +17,7 @@ Ce dépôt regroupe des composants UI développés en PHP, compatibles avec Boot
 ---
 
 ## 📦 Modules disponibles
-
-### 1. `bootstrapModalAtLevelBranchAndGroup.php`
+ ### 1. `bootstrapModalAtLevelBranchAndGroup.php`
 
 🔧 **Page démonstrative complète** avec :
 
@@ -39,16 +38,18 @@ Ce dépôt regroupe des composants UI développés en PHP, compatibles avec Boot
 - Réouverture automatique du modale initial si fermeture passive (option `autoRestore`)
 - Prévention des boucles ou fermetures involontaires grâce au suivi centralisé
 - Initialisation automatique des tableaux DataTables dans les modales ouvertes
+  - Activation via `data-datatable="true"`
+  - Message personnalisé en cas de tableau vide via `data-emptyrow="📭 Aucun utilisateur enregistré."`
 - Sécurisation du focus et de l’accessibilité à la fermeture (clic extérieur ou bouton) via `blur()` et nettoyage des attributs
 - Attribution sémantique claire :  
   `data-modal-level`, `data-modal-branch`, `data-modal-group`, `data-modalRequestId`,  
-  `data-returnToParentModal`, `data-datatable`
+  `data-returnToParentModal`, `data-datatable`, `data-emptyrow`
 
 📎 **Utilisation :**
 
 > Ce fichier est une **page autonome** à ouvrir directement dans le navigateur.  
 > Il sert de **base pédagogique** pour comprendre, tester et reproduire la logique modale dans vos propres projets.  
-> Il illustre également les bonnes pratiques d’accessibilité dans les systèmes modaux personnalisés.
+> Il illustre également les bonnes pratiques d’accessibilité et d’interface dans les systèmes modaux personnalisés.
 
 ❌ **Ne pas inclure via `require_once`** — ce n’est pas un module logique mais un exemple complet, conçu pour démontrer le fonctionnement du système modulaire.
 
