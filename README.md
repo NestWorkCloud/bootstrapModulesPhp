@@ -1,6 +1,7 @@
-# bootstrapModulesPhp
+# 📦 bootstrapModulesPhp
 
-Modules Bootstrap réutilisables pilotés en PHP — pour créer des interfaces claires, modulaires et extensibles.
+💡 Modules Bootstrap réutilisables pilotés en PHP  
+🔧 Logique modale, boutons d’action, configuration explicite et documentation pédagogique
 
 Ce dépôt regroupe des composants UI développés en PHP, compatibles avec Bootstrap, et conçus pour être facilement intégrés, configurés et documentés. Chaque module est accompagné d'une logique explicite, de commentaires pédagogiques en français, et d'une structure pensée pour les débutants comme pour les architectes techniques.
 
@@ -19,25 +20,48 @@ Ce dépôt regroupe des composants UI développés en PHP, compatibles avec Boot
 
 ### 1. `bootstrapModalAtLevelBranchAndGroup.php`
 
-**Page démonstrative complète** avec :
+🔧 **Page démonstrative complète** avec :
 
 - Structure HTML Bootstrap (`<head>`, `<body>`)
 - Panneaux d'information explicites
 - Boutons d'appel modale avec attributs personnalisés
 - Modales hiérarchisées selon niveau, branche et groupe
 
-**Fonctionnalités illustrées :**
+🔍 **Fonctionnalités illustrées :**
 
 - Navigation fluide entre modales liées
 - Retour volontaire à la modale parente
 - Prévention des boucles ou fermetures involontaires
 - Attribution sémantique : `data-modal-level`, `data-modal-branch`, `data-modal-group`, `data-returnToParentModal`
 
-**Utilisation :**
+📎 **Utilisation :**
 
 > Ce fichier est une **page autonome** à ouvrir directement dans le navigateur.  
 > Il sert de **base pédagogique** pour comprendre et reproduire la logique modale dans vos propres projets.
 
-**Ne pas inclure via `require_once`** — ce n’est pas un module logique mais un exemple complet.
+❌ **Ne pas inclure via `require_once`** — ce n’est pas un module logique mais un exemple complet.
 
 ---
+
+## 📄 Licence
+
+Ce projet est sous licence MIT. Voir le fichier `LICENSE` à la racine du dépôt.
+
+---
+
+## ✍️ Auteur
+
+Alexis GOMY — architecte technique, passionné par la clarté, la modularité et la documentation pédagogique.
+
+---
+
+## 🛠️ Modules à venir
+
+- 🔐 Générateur de mot de passe aléatoire
+
+---
+
+## 🤝 Contributions
+
+Les suggestions, retours et améliorations sont les bienvenus.  
+Ce dépôt vise à rester clair, ouvert et utile à tous.
