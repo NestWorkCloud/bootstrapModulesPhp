@@ -223,3 +223,17 @@
           }
       });
   }
+
+  // 🚀 Initialisation globale
+  const modalFlowConfig = createModalFlowConfig({
+    initialLevel: null,
+    initialGroup: null,
+    initialBranch: null,
+    manualClose: false,
+    autoRestore: true,
+    rollbackInProgress: false
+  });
+  
+  initModalOpening();
+  initModalRollback();
+  initModalCloseWatcher();
