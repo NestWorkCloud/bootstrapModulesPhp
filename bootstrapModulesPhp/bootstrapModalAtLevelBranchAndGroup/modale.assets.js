@@ -132,3 +132,60 @@
           });
       });
   }
+
+  // 🕵️‍♂️ Fonction de surveillance des fermetures de modales
+  // Détecte les fermetures volontaires ou passives, et décide si le modale initial doit être rouvert.
+  // Respecte l’option `autoRestore` et réinitialise le suivi si la fermeture est volontaire ou finale.
+  function initModalCloseWatcher() {
+      // Détection du clic sur la croix
+      document.querySelectorAll('.modal .btn-close').forEach(closeButton => {
+          closeButton.addEventListener('click', () => {
+              modalFlowConfig.manualClose = true;
+          });
+      });
+
+      // Détection des fermetures volontaires via le bouton "Fermer" dans le footer
+      document.querySelectorAll('button[data-bs-dismiss="modal"]').forEach(button => {
+          button.addEventListener('click', () => {
+              modalFlowConfig.manualClose = true;
+          });
+      });
+
+      // 🔍 Écoute des fermetures de modales
+      document.querySelectorAll('.modal').forEach(modal => {
+          modal.addEventListener('hidden.bs.modal', () => {
+              if (document.querySelector('.modal.show')) {
+                  modalFlowConfig.manualClose = false;
+                  return;
+              }
+
+              const closedLevel = modal.getAttribute('data-modalLevel');
+              const closedGroup = modal.getAttribute('data-modalGroup');
+              const closedBranch = modal.getAttribute('data-modalBranch');
+
+              // Si fermeture volontaire ou fermeture du modale initial → pas de réouverture
+              const isFinalClosure =
+                  modalFlowConfig.manualClose || (
+                      modalFlowConfig.initialLevel === closedLevel &&
+                      modalFlowConfig.initialGroup === closedGroup &&
+                      modalFlowConfig.initialBranch === closedBranch &&
+                      !modalFlowConfig.rollbackInProgress // ✅ empêche reset si rollback actif
+                  );
+              if (isFinalClosure) {
+                  resetModalTracking();
+                  return;
+              }
+
+              // Réouverture automatique du modale initial
+              if (modalFlowConfig.autoRestore && modalFlowConfig.initialLevel && modalFlowConfig.initialGroup) {
+                  const targetInitialModal = document.querySelector(`.modal[data-modalLevel="${modalFlowConfig.initialLevel}"][data-modalGroup="${modalFlowConfig.initialGroup}"][data-modalBranch="${modalFlowConfig.initialBranch}"]`);
+                  if (targetInitialModal) {
+                      const instance = bootstrap.Modal.getOrCreateInstance(targetInitialModal);
+                      instance.show();
+                  }
+                  modalFlowConfig.rollbackInProgress = false;
+                  resetModalTracking();
+              }
+          });
+      });
+  }
