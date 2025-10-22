@@ -20,3 +20,13 @@
           autoRestore
       };
   }
+
+  // 🔄 Fonction de réinitialisation du suivi modale
+  // Réinitialise tous les paramètres du système modale (niveau, groupe, branche, fermeture volontaire).
+  // Utilisée après une fermeture volontaire, une réouverture automatique ou manuellement pour repartir d’un état neutre.
+  function resetModalTracking() {
+      modalFlowConfig.initialLevel = null;
+      modalFlowConfig.initialGroup = null;
+      modalFlowConfig.initialBranch = null;
+      modalFlowConfig.manualClose = false;
+  }
