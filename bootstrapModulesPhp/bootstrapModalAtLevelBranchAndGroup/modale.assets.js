@@ -189,3 +189,37 @@
           });
       });
   }
+
+  // 📊 Initialise les tableaux DataTables marqués `data-datatable="true"` dans une modale donnée
+  // Chaque tableau doit avoir un `id` unique. Si non encore actif, il est initialisé avec les options standard.
+  // Aucun recalcul n’est effectué sur les tableaux déjà actifs pour éviter les conflits visuels ou logiques.
+  // Si l’attribut `data-emptyrow` est présent, son contenu est utilisé comme message personnalisé
+  // à afficher lorsque le tableau est vide, via l’option native `language.emptyTable` de DataTables.
+  // Exemple : <table data-datatable="true" data-emptyrow="📭 Aucun utilisateur enregistré.">
+  function initTableInModal(modalElement) {
+      const tables = modalElement.querySelectorAll('table[data-datatable="true"]');
+      tables.forEach(table => {
+          const tableId = table.id;
+          if (!tableId) {
+              console.warn("❌ Le tableau avec datatable=\"true\" doit avoir un id pour être initialisé.");
+              return;
+          }
+          if (!$.fn.DataTable.isDataTable(`#${tableId}`)) {
+              const emptyMessage = table.getAttribute('data-emptyrow') || "📭 Ce tableau est vide pour le moment.";
+
+              $(`#${tableId}`).DataTable({
+                  responsive: true,
+                  responsive: true,
+                  paging: true,
+                  searching: true,
+                  ordering: true,
+                  info: true,
+                  language: {
+                      url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/fr-FR.json',
+                      emptyTable: emptyMessage
+                  }
+              });
+              console.log(`✅ DataTables initialisé dans ${tableId}`);
+          }
+      });
+  }
