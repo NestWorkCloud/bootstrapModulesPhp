@@ -88,3 +88,47 @@
           });
       });
   }
+
+  // 🔙 Fonction de retour vers le modale précédent
+  // Permet de revenir à un modale de niveau inférieur dans le même groupe, en testant d’abord la branche actuelle,
+  // puis en décrémentant jusqu’à 1, avec fallback sans branche si aucun modale n’est trouvé.
+  function initModalRollback() {
+      document.querySelectorAll('button[data-returnToParentModal]').forEach(button => {
+          button.addEventListener('click', () => {
+              modalFlowConfig.rollbackInProgress = true;
+              const currentModal = button.closest('.modal');
+              if (currentModal){
+                  const currentLevel = parseInt(currentModal.getAttribute('data-modalLevel'));
+                  const currentGroup = currentModal.getAttribute('data-modalGroup');
+                  let currentBranch = parseInt(currentModal.getAttribute('data-modalBranch'));
+
+                  document.querySelectorAll('.modal.show').forEach(modal => {
+                      const instance = bootstrap.Modal.getInstance(modal);
+                      if (instance) instance.hide();
+                  });
+
+                  const previousLevel = currentLevel - 1;
+                  let targetModal = null;
+
+                  // Boucle descendante sur les branches
+                  while (currentBranch >= 1 && !targetModal){
+                      targetModal = document.querySelector(`.modal[data-modalLevel="${previousLevel}"][data-modalGroup="${currentGroup}"][data-modalBranch="${currentBranch}"]`);
+                      currentBranch--;
+                  }
+
+                  // Si aucune branche ne correspond, on tente sans branche
+                  if (!targetModal) {
+                      targetModal = document.querySelector(`.modal[data-modalLevel="${previousLevel}"][data-modalGroup="${currentGroup}"]`);
+                  }
+
+                  // Ouverture du modale
+                  if (targetModal){
+                      const instance = bootstrap.Modal.getOrCreateInstance(targetModal);
+                      instance.show();
+                  }else{
+                      console.warn("❌ Aucun modale précédent trouvé pour :", previousLevel, currentGroup);
+                  }
+              }
+          });
+      });
+  }
