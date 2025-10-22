@@ -30,3 +30,61 @@
       modalFlowConfig.initialBranch = null;
       modalFlowConfig.manualClose = false;
   }
+
+  // 🔓 Fonction d’ouverture dynamique des modales
+  // Écoute les boutons de déclenchement, enregistre le point de retour initial, ferme les modales actives,
+  // puis ouvre la modale ciblée par niveau/groupe/branche et initialise ses tableaux marqués data-datatable="true".
+  function initModalOpening() {
+      document.querySelectorAll('button[data-requestedModalLevel]').forEach(button => {
+          button.addEventListener('click', () => {
+              const requestedLevel = button.getAttribute('data-requestedModalLevel');
+              const requestedGroup = button.getAttribute('data-modalGroup');
+              const requestedBranch = button.getAttribute('data-modalBranch');
+              const requestId = button.getAttribute('data-modalRequestId');
+  
+              // Stockage conditionnel de l'ID métier
+              modalFlowConfig.requestId = requestId ? requestId : null;
+  
+              // Enregistrement du point de retour initial
+              if (!modalFlowConfig.initialLevel){
+                  modalFlowConfig.initialLevel = requestedLevel;
+                  modalFlowConfig.initialGroup = requestedGroup;
+                  modalFlowConfig.initialBranch = requestedBranch;
+              }
+  
+              // Fermeture des modales ouvertes
+              document.querySelectorAll('.modal.show').forEach(modal => {
+                  const instance = bootstrap.Modal.getInstance(modal);
+                  if (instance) instance.hide();
+              });
+  
+              // Construction du sélecteur modale
+              let selector = `.modal[data-modalLevel="${requestedLevel}"][data-modalGroup="${requestedGroup}"][data-modalBranch="${requestedBranch}"]`;
+  
+              // Si un ID métier est fourni, on le cible aussi
+              if (requestId) {
+                  selector += `[data-modalRequestId="${requestId}"]`;
+              }
+  
+              // Ouverture du modale
+              const targetModal = document.querySelector(selector);
+              if (targetModal){
+  
+                  // 🪄 Affichage et initialisation
+                  const instance = bootstrap.Modal.getOrCreateInstance(targetModal);
+                  instance.show();
+                  initTableInModal(targetModal);
+  
+                  // 🔍 Interception de la fermeture pour éviter le focus bloqué
+                  targetModal.addEventListener('hide.bs.modal', () => {
+                      if (document.activeElement instanceof HTMLElement){
+                          document.activeElement.blur(); // ✅ Évite le conflit aria-hidden + focus
+                      }
+                  });
+  
+              }else{
+                  console.warn("❌ Aucun modale trouvé pour :", requestedLevel, requestedGroup, requestedBranch);
+              }
+          });
+      });
+  }
